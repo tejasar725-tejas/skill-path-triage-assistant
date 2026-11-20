@@ -1,0 +1,146 @@
+[
+  {
+    "employee_id": "E001",
+    "role": "Data Analyst",
+    "skills": [
+      "Excel",
+      "SQL",
+      "Python",
+      "Pandas",
+      "Power BI",
+      "Statistics"
+    ]
+  },
+  {
+    "employee_id": "E002",
+    "role": "Data Analyst",
+    "skills": [
+      "Excel",
+      "SQL",
+      "Python",
+      "Pandas",
+      "Power BI",
+      "Tableau"
+    ]
+  },
+  {
+    "employee_id": "E003",
+    "role": "Junior Data Analyst",
+    "skills": [
+      "Excel",
+      "SQL",
+      "Python",
+      "Pandas",
+      "Statistics",
+      "Machine Learning"
+    ]
+  },
+  {
+    "employee_id": "E004",
+    "role": "Software Developer",
+    "skills": [
+      "Python",
+      "Git",
+      "Linux",
+      "SQL",
+      "Docker",
+      "Kubernetes"
+    ]
+  },
+  {
+    "employee_id": "E005",
+    "role": "Software Developer",
+    "skills": [
+      "JavaScript",
+      "Git",
+      "React",
+      "Node.js",
+      "Docker",
+      "AWS"
+    ]
+  },
+  {
+    "employee_id": "E006",
+    "role": "Cloud Engineer",
+    "skills": [
+      "Linux",
+      "Networking",
+      "Python",
+      "Docker",
+      "AWS",
+      "Kubernetes"
+    ]
+  },
+  {
+    "employee_id": "E007",
+    "role": "Cloud Engineer",
+    "skills": [
+      "Linux",
+      "Networking",
+      "Docker",
+      "AWS",
+      "Terraform",
+      "Kubernetes"
+    ]
+  },
+  {
+    "employee_id": "E008",
+    "role": "ML Engineer",
+    "skills": [
+      "Python",
+      "SQL",
+      "Pandas",
+      "Statistics",
+      "Machine Learning",
+      "TensorFlow"
+    ]
+  },
+  {
+    "employee_id": "E009",
+    "role": "ML Engineer",
+    "skills": [
+      "Python",
+      "Pandas",
+      "Statistics",
+      "Machine Learning",
+      "PyTorch",
+      "MLOps"
+    ]
+  },
+  {
+    "employee_id": "E010",
+    "role": "Business Analyst",
+    "skills": [
+      "Excel",
+      "SQL",
+      "Power BI",
+      "Statistics",
+      "Python",
+      "Tableau"
+    ]
+  },
+  {
+    "employee_id": "E011",
+    "role": "Frontend Developer",
+    "skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "TypeScript",
+      "Testing"
+    ]
+  },
+  {
+    "employee_id": "E012",
+    "role": "Backend Developer",
+    "skills": [
+      "Python",
+      "SQL",
+      "Git",
+      "APIs",
+      "Docker",
+      "AWS"
+    ]
+  }
+]
