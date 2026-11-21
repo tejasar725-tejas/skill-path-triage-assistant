@@ -1,35 +1,35 @@
-"""Your tests. Each milestone in README.md gets one here: write the test first, then make it pass.
+﻿from app.cli import main as cli_main
+from app.core import milestone_1, milestone_2, milestone_3, milestone_4, milestone_5
 
-They start skipped. Remove the `skip` line as you work on each milestone.
-"""
-import pytest
 
-# Milestone 1: Define employee skill sets or job roles as sequences over time.
-@pytest.mark.skip(reason="remove this line when you start milestone 1")
 def test_milestone_1():
-    raise NotImplementedError("write the test for milestone 1")
+    seqs = milestone_1()
+    assert len(seqs) >= 8
+    assert all(len(v) >= 2 for v in seqs.values())
 
 
-# Milestone 2: Mine frequent skill/role transition patterns using `thilimarketbasket`.
-@pytest.mark.skip(reason="remove this line when you start milestone 2")
 def test_milestone_2():
-    raise NotImplementedError("write the test for milestone 2")
+    seqs = milestone_1()
+    patterns = milestone_2(seqs, min_support=0.2, min_confidence=0.4)
+    assert len(patterns) > 0
 
 
-# Milestone 3: Train an LM on these sequences to predict the next skill or role.
-@pytest.mark.skip(reason="remove this line when you start milestone 3")
 def test_milestone_3():
-    raise NotImplementedError("write the test for milestone 3")
+    seqs = milestone_1()
+    lm = milestone_3(seqs, seed=42)
+    preds = lm.predict_next(["role:junior_analyst", "skill:sql"], top_n=2)
+    assert len(preds) > 0
 
 
-# Milestone 4: Evaluate the model's ability to suggest relevant next steps in career development.
-@pytest.mark.skip(reason="remove this line when you start milestone 4")
 def test_milestone_4():
-    raise NotImplementedError("write the test for milestone 4")
+    seqs = milestone_1()
+    metrics = milestone_4(seqs, top_n=3, seed=42)
+    assert metrics["test_count"] > 0
+    assert float(metrics["lm_top_n_acc"]) >= float(metrics["baseline_top1_acc"])
 
 
-# Milestone 5: Provide a CLI to input current skills/role and get suggestions for next steps.
-@pytest.mark.skip(reason="remove this line when you start milestone 5")
-def test_milestone_5():
-    raise NotImplementedError("write the test for milestone 5")
-
+def test_milestone_5(capsys):
+    suggestions = milestone_5(["skill:python"], top_n=2)
+    assert len(suggestions) <= 2
+    cli_main(["suggest", "role:junior_analyst", "skill:sql", "--top-n", "2"])
+    assert "Current profile:" in capsys.readouterr().out
