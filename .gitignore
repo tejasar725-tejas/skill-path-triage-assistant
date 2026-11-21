@@ -1,9 +1,12 @@
-__pycache__/
-*.py[cod]
-.pytest_cache/
-.venv/
-venv/
+# Secrets: never commit your real settings
 .env
-artifacts/
-outputs/*.json
-outputs/*.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Local data
+data/
+*.db

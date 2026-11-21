@@ -1,1 +1,0 @@
-"""Skill Path Triage Assistant."""

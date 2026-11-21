@@ -1,25 +1,26 @@
-"""Load and validate employee skill sequences."""
-from __future__ import annotations
+"""A tiny key-value store in one JSON file (no server, easy to read). Values can be anything JSON can hold."""
 import json
+import os
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_DATA = ROOT / "data" / "employee_sequences.json"
 
+class Store:
+    def __init__(self, path: str | None = None):
+        self.path = Path(path or os.environ.get("DATA_PATH", "data/app.json"))
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        if not self.path.exists():
+            self.path.write_text("{}")
 
-def load_sequences(path: str | Path | None = None) -> list[dict]:
-    source = Path(path) if path else DEFAULT_DATA
-    records = json.loads(source.read_text(encoding="utf-8"))
-    if not isinstance(records, list) or not records:
-        raise ValueError("Dataset must be a non-empty JSON list.")
-    cleaned = []
-    for i, row in enumerate(records, 1):
-        if not isinstance(row, dict) or not isinstance(row.get("skills"), list):
-            raise ValueError(f"Record {i} must contain a skills list.")
-        skills = [str(s).strip() for s in row["skills"] if str(s).strip()]
-        if len(skills) < 2:
-            raise ValueError(f"Record {i} needs at least two chronological skills.")
-        cleaned.append({"employee_id": str(row.get("employee_id", f"employee-{i}")),
-                        "role": str(row.get("role", "Unspecified")),
-                        "skills": skills})
-    return cleaned
+    def _read(self) -> dict:
+        return json.loads(self.path.read_text() or "{}")
+
+    def put(self, key: str, value) -> None:
+        data = self._read()
+        data[key] = value
+        self.path.write_text(json.dumps(data, indent=2))
+
+    def get(self, key: str, default=None):
+        return self._read().get(key, default)
+
+    def all(self) -> dict:
+        return dict(sorted(self._read().items()))

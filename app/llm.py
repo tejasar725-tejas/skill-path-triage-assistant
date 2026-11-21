@@ -1,9 +1,35 @@
-"""Small language-model inference wrapper."""
-from .core import train_model
+"""One chat call that works with Ollama, Groq or Gemini: change three settings in .env, not the code."""
+import os
+from pathlib import Path
+
+import httpx
 
 
-def suggest_next_skills(current_skills: list[str], model=None, top_n: int = 5) -> list[dict]:
-    if not current_skills or not any(s.strip() for s in current_skills):
-        raise ValueError("Provide at least one current skill.")
-    model = model or train_model()
-    return model.predict([s.strip() for s in current_skills if s.strip()], top_n=top_n)
+def _load_env() -> None:
+    """Read KEY=VALUE lines from .env (if there is one) without overriding real environment variables."""
+    path = Path(".env")
+    if not path.exists():
+        return
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip())
+
+
+def settings() -> tuple[str, str, str]:
+    _load_env()
+    return (os.environ.get("LLM_BASE_URL") or "http://localhost:11434/v1",
+            os.environ.get("LLM_API_KEY", ""), os.environ.get("LLM_MODEL", ""))
+
+
+def chat(messages: list[dict], **options) -> str:
+    """Send chat messages, get the reply text. `options` go straight to the API (temperature, max_tokens...)."""
+    base, key, model = settings()
+    if not model:
+        raise RuntimeError("Set LLM_MODEL in .env (see .env.example).")
+    headers = {"Authorization": f"Bearer {key}"} if key else {}
+    r = httpx.post(f"{base.rstrip('/')}/chat/completions", headers=headers, timeout=120,
+                   json={"model": model, "messages": messages, **options})
+    r.raise_for_status()
+    return r.json()["choices"][0]["message"]["content"]
