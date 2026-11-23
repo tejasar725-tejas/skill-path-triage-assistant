@@ -1,3 +1,4 @@
+[![Built with askThili](https://ask.thili.ai/api/v1/public/projects/qcu4tsmmk2/badge.svg)](https://ask.thili.ai/b/qcu4tsmmk2)
 # Skill Path Triage Assistant
 
 [![Built with askThili](https://ask.thili.ai/api/v1/public/projects/qcu4tsmmk2/badge.svg)](https://ask.thili.ai/b/qcu4tsmmk2)
